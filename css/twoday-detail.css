@@ -405,3 +405,169 @@ body.twoday-page-body {
         height: 120px;
     }
 }
+
+/* ==================== 4. 底部走讀歷程檔案樣式 (標題與按鈕左右排列) ==================== */
+.twoday-bottom-archive-wrap {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.twoday-archive-card {
+    background: #FFFFFF;
+    border: 1px solid #ECE7DE;
+    border-radius: 16px;
+    padding: 32px 40px 36px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+    box-sizing: border-box;
+}
+
+/* 頂部 Header：左右對齊 */
+.archive-card-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px dashed #E5E0D8;
+    margin-bottom: 26px;
+}
+
+.archive-header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.twoday-archive-card .archive-eyebrow {
+    font-family: var(--display, 'Poppins', sans-serif);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #D96328;
+}
+
+.twoday-archive-card .archive-title {
+    font-family: var(--serif, 'Noto Serif TC', serif);
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: #111111;
+    margin: 0;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+}
+
+/* 右側按鈕群 */
+.archive-action-btns {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.twoday-archive-card .btn-archive-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #D96328;
+    color: #FFFFFF !important;
+    text-decoration: none;
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    box-shadow: 0 4px 14px rgba(217, 99, 40, 0.3);
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.twoday-archive-card .btn-archive-primary:hover {
+    background-color: #B84E1B;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(217, 99, 40, 0.4);
+}
+
+.twoday-archive-card .btn-archive-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    color: #4A463F;
+    border: 1.5px solid #D8D2C6;
+    text-decoration: none;
+    padding: 9px 20px;
+    border-radius: 999px;
+    font-size: 0.84rem;
+    font-weight: 700;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.twoday-archive-card .btn-archive-secondary:hover {
+    background-color: #FAF8F5;
+    border-color: #111111;
+    color: #111111;
+}
+
+/* 下方三欄橫向資訊列 */
+.archive-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    padding: 4px 0;
+}
+
+.archive-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.meta-icon-bubble {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background-color: #F8F5F0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.meta-text-box {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.meta-label {
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: #8C867D;
+    letter-spacing: 0.5px;
+}
+
+.meta-val {
+    font-size: 0.92rem;
+    font-weight: 800;
+    color: #222222;
+    line-height: 1.35;
+}
+
+/* RWD 平板與手機版適配 */
+@media (max-width: 960px) {
+    .archive-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+    .archive-action-btns {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+    .archive-meta-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+}

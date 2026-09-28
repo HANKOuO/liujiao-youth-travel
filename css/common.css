@@ -57,40 +57,28 @@ body {
     left: 0;
     width: 100% !important;
     height: 82px !important;
-    
-    /* 核心 1：移除所有深色漸層，回歸 100% 純透明 */
     background: transparent !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
-    
-    /* 核心 2：徹底拔除邊框與陰影，杜絕次像素黑線 */
     border: none !important;
     border-bottom: 0 !important;
     outline: none !important;
     box-shadow: none !important;
-    
     z-index: 1000;
     box-sizing: border-box;
     display: flex;
     align-items: center;
-
-    /* 平滑過渡動畫 */
     transition: background-color 0.35s ease, 
                 backdrop-filter 0.35s ease, 
                 -webkit-backdrop-filter 0.35s ease, 
                 box-shadow 0.35s ease !important;
 }
 
-/* ==================== 往下滑動時的毛玻璃微透明導覽列 ==================== */
+/* 往下滑動時的毛玻璃微透明導覽列 */
 .site-header.scrolled {
-    /* 將原本較厚的 0.92 降低為 0.72 ~ 0.75 的清透白 */
     background: rgba(255, 255, 255, 0.72) !important;
-    
-    /* 核心毛玻璃效果：模糊背景畫面，透出下方滑過的內容 */
     backdrop-filter: blur(16px) saturate(180%) !important;
     -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
-    
-    /* 極淡的微透明底邊線與柔和投影 */
     border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.03) !important;
 }
@@ -118,7 +106,6 @@ body {
     flex-shrink: 0;
 }
 
-/* 兩張圖片完全重疊，保持相同尺寸與放大倍率 */
 .nav-logo-img {
     height: 56px !important;
     width: auto !important;
@@ -131,7 +118,6 @@ body {
     transition: opacity 0.35s ease;
 }
 
-/* 頂部狀態：白字顯示，黑字隱藏 */
 .nav-logo-img.logo-white {
     opacity: 1;
     position: relative;
@@ -148,7 +134,6 @@ body {
     z-index: 1;
 }
 
-/* 往下滑動產生白底時 (.scrolled)：白字漸隱，黑字浮現 */
 .site-header.scrolled .nav-logo-img.logo-white {
     opacity: 0;
     pointer-events: none;
@@ -159,7 +144,7 @@ body {
     pointer-events: auto;
 }
 
-/* 選單項文字：頂部固定純白 */
+/* 選單項文字 */
 .nav-menu {
     display: flex;
     align-items: center;
@@ -181,7 +166,7 @@ body {
 .nav-link {
     font-size: 0.96rem;
     font-weight: 600;
-    color: #FFFFFF !important; /* 預設純白 */
+    color: #FFFFFF !important;
     text-decoration: none;
     letter-spacing: 0.5px;
     padding: 8px 0;
@@ -189,7 +174,7 @@ body {
     align-items: center;
     gap: 4px;
     white-space: nowrap;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); /* 輕微微影防止淺景吃字 */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
     transition: color 0.25s ease, text-shadow 0.25s ease;
 }
 
@@ -198,7 +183,6 @@ body {
     color: #FFA366 !important;
 }
 
-/* 往下滑動產生白底後，選單文字自然轉回深黑 */
 .site-header.scrolled .nav-link {
     color: #111111 !important;
     text-shadow: none !important;
@@ -236,7 +220,7 @@ body {
     filter: none;
 }
 
-/* 下拉選單本體維持純白底深色字 */
+/* 下拉選單本體 */
 .nav-dropdown-menu {
     position: absolute;
     top: 100%;
@@ -485,7 +469,7 @@ body {
     justify-content: center;
 }
 
-/* ==================== 4. 全螢幕搜尋浮層 (Search Overlay) ==================== */
+/* ==================== 4. 全螢幕搜尋浮層 ==================== */
 .search-overlay {
     position: fixed;
     inset: 0;
@@ -577,7 +561,7 @@ body {
     border-radius: var(--radius-pill);
 }
 
-/* ==================== 5. 手機版抽屜導覽列 (Sidebar Drawer) ==================== */
+/* ==================== 5. 手機版抽屜導覽列 ==================== */
 .sidebar-nav {
     position: fixed;
     top: 0; 
@@ -657,7 +641,7 @@ body {
 
 .footer-main-grid {
     display: grid !important;
-    grid-template-columns: 340px 1fr 360px !important; /* 左側品牌固定 340px、右側訂閱固定 360px、中間導航完全展開 */
+    grid-template-columns: 340px 1fr 360px !important;
     gap: 80px !important;
     align-items: flex-start !important;
     padding-bottom: 70px !important;
@@ -670,7 +654,6 @@ body {
     flex-direction: column;
 }
 
-/* ==================== 頁尾官方純 LOGO 樣式 ==================== */
 .footer-brand-header {
     display: inline-block !important;
     text-decoration: none !important;
@@ -678,9 +661,8 @@ body {
     padding: 0 !important;
 }
 
-/* 移除外層的小框框限制，讓 LOGO 展現清晰橫版質感 */
 .footer-logo-img {
-    height: 70px !important;       /* 高度鎖定在 48px，比例大氣且不突兀 */
+    height: 70px !important;
     width: auto !important;
     max-width: 220px !important;
     object-fit: contain !important;
@@ -694,16 +676,6 @@ body {
     transform: translateY(-2px);
 }
 
-.footer-brand-text-group {
-    display: flex;
-    flex-direction: column;
-}
-
-.footer-brand-col {
-    display: flex;
-    flex-direction: column;
-}
-
 .footer-brand-title {
     font-family: var(--serif, 'Noto Serif TC', serif);
     font-size: 1.25rem;
@@ -714,7 +686,7 @@ body {
 
 .footer-brand-slogan {
     font-size: 0.72rem;
-    color: #8C867C;
+    color: #8C867D;
     letter-spacing: 1px;
     margin-top: 2px;
 }
@@ -742,7 +714,7 @@ body {
 .footer-nav-columns {
     display: grid !important;
     grid-template-columns: repeat(3, 1fr) !important;
-    gap: 85px !important; /* 充分拉開「認識地方」「走讀路線」「故事與動態」的橫向距離 */
+    gap: 85px !important;
 }
 
 .col-header-wrap {
@@ -758,7 +730,7 @@ body {
     font-size: 0.6rem;
     font-weight: 800;
     letter-spacing: 2px;
-    color: #D96328; /* 六腳主題橘 */
+    color: #D96328;
     margin-bottom: 4px;
 }
 
@@ -778,7 +750,7 @@ body {
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 16px !important; /* 項目縱向也微幅拉開，閱讀更舒適 */
+    gap: 16px !important;
 }
 
 .nav-link-list a {
@@ -860,25 +832,34 @@ body {
     transform: scale(1.08);
 }
 
-/* ==================== 頁尾社群按鈕 (IconStack 樣式) ==================== */
+/* 頁尾社群按鈕 */
 .footer-social-row {
     display: flex;
     align-items: center;
     gap: 12px;
+    margin-top: 18px;
 }
 
 .social-btn {
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: #A6A096;
+    color: #E0DDD7;
     text-decoration: none;
-    transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.25s ease;
+}
+
+.social-btn:hover {
+    background-color: #D96328;
+    border-color: #D96328;
+    color: #FFFFFF;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(217, 99, 40, 0.35);
 }
 
 .social-icon-svg {
@@ -888,17 +869,8 @@ body {
     transition: transform 0.25s ease;
 }
 
-/* 懸停效果：背景切換為主題橘、圖標轉白並微幅放大上浮 */
-.social-btn:hover {
-    background-color: #D96328;
-    border-color: #D96328;
-    color: #FFFFFF;
-    transform: translateY(-3px);
-    box-shadow: 0 4px 14px rgba(217, 99, 40, 0.35);
-}
-
 .social-btn:hover .social-icon-svg {
-    transform: scale(1.1);
+    transform: scale(1.08);
 }
 
 /* 4. 最底部版權列 */
@@ -932,6 +904,11 @@ body {
 }
 
 /* 5. 響應式適配 */
+@media (max-width: 1150px) {
+    .nav-menu, .nav-btn-cta { display: none !important; }
+    .hamburger-toggle { display: flex !important; }
+}
+
 @media (max-width: 1100px) {
     .footer-main-grid {
         grid-template-columns: 1fr;
@@ -939,6 +916,18 @@ body {
     }
     .footer-brand-desc {
         max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-container, .footer-main-grid {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+    .footer-nav-columns {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 28px;
     }
 }
 
@@ -954,25 +943,216 @@ body {
     }
 }
 
-/* ==================== 7. RWD 響應式斷點 ==================== */
-@media (max-width: 1150px) {
-    .nav-menu, .nav-btn-cta { display: none !important; }
-    .hamburger-toggle { display: flex !important; }
+/* ====================================================================
+   全站統一：100vh 滿版沉浸式 Hero 首屏規範 (白字 ✕ 黑描邊 ✕ 頂部漸層)
+   ==================================================================== */
+.site-hero-full-banner {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-top: 0;
+    height: 100vh;
+    min-height: 620px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
 }
 
+.site-hero-full-banner .hero-bg-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.site-hero-full-banner .hero-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+/* 頂部單純黑色漸層 */
+.site-hero-full-banner .hero-gradient-overlay {
+    display: block !important;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.72) 0%,
+        rgba(0, 0, 0, 0.4) 18%,
+        rgba(0, 0, 0, 0.12) 28%,
+        transparent 40%
+    ) !important;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.site-hero-full-banner .hero-content-inner {
+    position: relative;
+    z-index: 5;
+    max-width: 1380px;
+    width: 100%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.site-hero-full-banner .hero-heading-block {
+    margin-left: 100px;
+    max-width: 620px;
+    transform: translateY(150px);
+}
+
+/* 1. 小標題：純白 + 細黑邊 + 陰影 */
+.site-hero-full-banner .hero-eyebrow {
+    font-family: var(--display, 'Poppins', sans-serif);
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 8px;
+    color: #FFFFFF !important;
+    margin-bottom: 12px;
+    display: block;
+    -webkit-text-stroke: 0.6px rgba(0, 0, 0, 0.85);
+    text-shadow: 
+        0 1px 3px rgba(0, 0, 0, 0.9),
+        0 0 6px rgba(0, 0, 0, 0.7) !important;
+}
+
+/* 2. 主標題：純白 + 1.2px 純黑描邊 + 雙層立體暗影 */
+.site-hero-full-banner .hero-main-title {
+    font-family: var(--serif, 'Noto Serif TC', serif);
+    font-size: clamp(3.6rem, 5.5vw, 5.2rem);
+    font-weight: 900;
+    letter-spacing: 4px;
+    line-height: 1.05;
+    color: #FFFFFF !important;
+    margin: 0 0 16px 0;
+    -webkit-text-stroke: 1.2px #111111;
+    paint-order: stroke fill;
+    text-shadow: 
+        0 2px 6px rgba(0, 0, 0, 0.95),
+        0 4px 18px rgba(0, 0, 0, 0.75) !important;
+}
+
+/* 3. 副標題：純白 + 細黑邊 + 輪廓 */
+.site-hero-full-banner .hero-sub-slogan {
+    font-family: var(--serif, 'Noto Serif TC', serif);
+    font-size: clamp(1.1rem, 1.45vw, 1.35rem);
+    font-weight: 600;
+    color: #FFFFFF !important;
+    margin: 0;
+    letter-spacing: 0.8px;
+    -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.9);
+    paint-order: stroke fill;
+    text-shadow: 
+        0 1px 4px rgba(0, 0, 0, 0.95),
+        0 2px 10px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* 底部滑動指示器 */
+.site-hero-full-banner .hero-scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #FFFFFF;
+    opacity: 0.85;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.site-hero-full-banner .hero-scroll-indicator:hover {
+    opacity: 1;
+    transform: translateX(-50%) translateY(4px);
+}
+
+.site-hero-full-banner .scroll-prompt-text {
+    font-family: var(--display, 'Poppins', sans-serif);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: #FFFFFF;
+}
+
+.site-hero-full-banner .scroll-mouse-icon {
+    width: 22px;
+    height: 34px;
+    border: 2px solid #FFFFFF;
+    border-radius: 12px;
+    position: relative;
+}
+
+.site-hero-full-banner .scroll-wheel-dot {
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    width: 3px;
+    height: 6px;
+    background-color: #FFFFFF;
+    border-radius: 2px;
+    transform: translateX(-50%);
+    animation: scrollDotAnim 1.6s infinite ease-in-out;
+}
+
+/* RWD 適配 */
 @media (max-width: 768px) {
-    .nav-container, .footer-main-grid, .footer-legal-inner {
-        padding-left: 20px !important;
-        padding-right: 20px !important;
+    .site-hero-full-banner .hero-heading-block {
+        margin-left: 0;
+        transform: translateY(100px);
     }
-    .footer-nav-columns {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 28px;
-    }
-    .footer-legal-inner {
-        flex-direction: column;
-        gap: 12px;
-        text-align: center;
-    }
+}
+
+/* ==================== 徹底隱藏 Google 翻譯頂部橫條與防下推 ==================== */
+/* 1. 隱藏 Google 橫條的所有 iframe 變體 */
+.goog-te-banner-frame,
+.goog-te-banner-frame.skiptranslate,
+iframe.goog-te-banner-frame,
+.VIpgJd-ZVi9od-OR9Gae-sztRental,
+iframe[id=":1.container"],
+iframe[id=":2.container"] {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    width: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* 2. 強制鎖死 body 與 html 位置，嚴防被 Google 注入 top: 40px */
+html, body {
+    top: 0px !important;
+    position: static !important;
+    margin-top: 0px !important;
+}
+
+/* 3. 隱藏翻譯後的滑鼠 hover 提示框與反光文字 */
+.goog-tooltip,
+.goog-tooltip:hover {
+    display: none !important;
+}
+
+.goog-text-highlight {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+#google_translate_element {
+    display: none !important;
 }

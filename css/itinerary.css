@@ -25,8 +25,8 @@ body.routes-page-body {
     position: relative;
     width: 100vw;
     margin: 0 !important;
-    padding-top: 0 !important; /* 移除舊有的 76px 留白，改為真正滿版 */
-    height: 100vh;             /* 精準 100vh 第一屏，導覽列純透明覆蓋穿透 */
+    padding-top: 0 !important;
+    height: 100vh;
     min-height: 600px;
     overflow: hidden;
     display: flex;
@@ -64,7 +64,6 @@ body.routes-page-body {
     box-sizing: border-box;
 }
 
-/* 左側邊緣細小英文字標 */
 .itinerary-hero-full-banner .hero-vertical-meta {
     position: absolute;
     left: 40px;
@@ -81,7 +80,6 @@ body.routes-page-body {
     line-height: 1.4;
 }
 
-/* 標題排版主區塊 */
 .itinerary-hero-full-banner .hero-heading-block {
     margin-left: 100px;
     max-width: 650px;
@@ -107,7 +105,6 @@ body.routes-page-body {
     line-height: 1.05;
     color: #111111;
     margin: 0 0 18px 0;
-    /* 移除白霧後，微立體陰影保證字體層次立體可讀 */
     text-shadow: 0 2px 12px rgba(255, 255, 255, 0.85);
 }
 
@@ -121,7 +118,6 @@ body.routes-page-body {
     text-shadow: 0 1px 8px rgba(255, 255, 255, 0.7);
 }
 
-/* 右下側文青風手寫浮動字 */
 .itinerary-hero-full-banner .hero-script-floating {
     position: absolute;
     right: 6%;
@@ -136,7 +132,6 @@ body.routes-page-body {
     pointer-events: none;
 }
 
-/* 底部滑動指示器 */
 .itinerary-hero-full-banner .hero-scroll-indicator {
     position: absolute;
     bottom: 30px;
@@ -191,14 +186,12 @@ body.routes-page-body {
     100% { transform: translate(-50%, 14px); opacity: 0; }
 }
 
-/* ==================== 走讀路線 Hero 上黑下白漸層 (完整權重) ==================== */
 .itinerary-hero-full-banner .hero-gradient-overlay {
     display: block !important;
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
-    /* 上方 35% 黑色漸層 (護住白字選單) + 底部 35% 白色漸層 (柔和銜接卡牌區) */
     background: linear-gradient(
         180deg,
         rgba(0, 0, 0, 0.7) 0%,
@@ -228,7 +221,6 @@ body.routes-page-body {
     scroll-margin-top: 76px;
 }
 
-/* ---------------- 3-1. 頂部編輯室排版 (居中策展式) ---------------- */
 .routes-header-editorial {
     display: flex;
     justify-content: center;
@@ -257,7 +249,6 @@ body.routes-page-body {
     margin-bottom: 8px;
 }
 
-/* 標題與芒草定位外框 */
 .main-title-with-art {
     position: relative;
     display: inline-block;
@@ -274,7 +265,6 @@ body.routes-page-body {
     margin: 0;
 }
 
-/* 芒草線稿：如輕巧印章般飄在標題右上方 */
 .title-grain-sketch {
     position: absolute;
     top: -24px;
@@ -290,7 +280,6 @@ body.routes-page-body {
     height: 100%;
 }
 
-/* 居中副標題 */
 .routes-slogan-center {
     font-family: var(--serif, 'Noto Serif TC', serif);
     font-size: clamp(0.95rem, 1.2vw, 1.12rem);
@@ -301,11 +290,10 @@ body.routes-page-body {
     line-height: 1.6;
 }
 
-/* ---------------- 3-2. 中央 4 張主題路線卡牌群 ---------------- */
 .routes-cards-deck {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);  /* 👈 由 repeat(5, 1fr) 改為 repeat(4, 1fr) */
-    gap: 20px;                             /* 4 欄時將間距由 16px 微調至 20px，比例更和諧 */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
     width: 100%;
     align-items: stretch;
     margin-bottom: 28px;
@@ -395,27 +383,23 @@ body.routes-page-body {
 }
 
 .card-route-title {
-    writing-mode: vertical-rl;            /* 啟用文字垂直直書（由右至左、由上至下） */
-    text-orientation: upright;            /* 確保中文字端正直立 */
+    writing-mode: vertical-rl;
+    text-orientation: upright;
     font-family: var(--serif, 'Noto Serif TC', serif);
     font-size: 2rem;
     font-weight: 900;
-    letter-spacing: 6px;                  /* 直排時字距稍微拉開，呼吸感更好 */
+    letter-spacing: 6px;
     color: #F7F5F0;
     margin: 0;
     line-height: 1.2;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.75);
-    max-height: 260px;                    /* 限制高度避免壓到底部按鈕 */
-}
-
-.card-route-sub {
-    display: none;                        /* 直書模式下隱藏副文字，版面最純粹乾淨 */
+    max-height: 260px;
 }
 
 .card-bottom-footer {
     display: flex;
     align-items: center;
-    justify-content: flex-end; /* 關鍵：讓內容一律靠右對齊 */
+    justify-content: flex-end;
     width: 100%;
     margin-top: auto;
     position: relative;
@@ -423,29 +407,8 @@ body.routes-page-body {
     box-sizing: border-box;
 }
 
-.meta-specs-list {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.spec-item {
-    font-size: 0.74rem;
-    font-weight: 600;
-    color: #F0EDE8;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    letter-spacing: 0.5px;
-    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
-}
-
-.spec-icon {
-    font-size: 0.75rem;
-}
-
 .btn-card-circle-arrow {
-    margin-left: auto !important; /* 確保無論左側有無文字，箭頭一律推至最右邊 */
+    margin-left: auto !important;
     width: 36px;
     height: 36px;
     border-radius: 50%;
@@ -465,60 +428,10 @@ body.routes-page-body {
     background-color: #B84E1B;
 }
 
-/* ---------------- 3-3. 底部翻頁與品牌裝飾 ---------------- */
-.routes-bottom-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 10px;
-    margin-bottom: 20px;
-}
-
-.routes-bottom-brand-note {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.stamp-en-texts {
-    font-family: var(--display, sans-serif);
-    font-size: 0.58rem;
-    font-weight: 800;
-    letter-spacing: 2px;
-    line-height: 1.35;
-    color: #9C9589;
-}
-
-.routes-deck-arrows {
-    display: flex;
-    gap: 8px;
-}
-
-.btn-deck-nav {
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    border: 1px solid #D8D2C6;
-    background: #FFFFFF;
-    color: #4A4641;
-    font-size: 0.95rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.btn-deck-nav:hover {
-    border-color: #D96328;
-    color: #D96328;
-    transform: scale(1.06);
-}
-
-/* ---------------- 4. 響應式適配 ---------------- */
+/* ==================== 4. 響應式適配 ==================== */
 @media (max-width: 1100px) {
     .routes-cards-deck {
-        grid-template-columns: repeat(2, 1fr); /* 平板尺寸自適應為 2x2 雙欄排版 */
+        grid-template-columns: repeat(2, 1fr);
         gap: 16px;
     }
     .routes-header-editorial {
@@ -542,7 +455,7 @@ body.routes-page-body {
         padding: 30px 20px;
     }
     .routes-cards-deck {
-        grid-template-columns: 1fr;            /* 手機版維持單欄卡片 */
+        grid-template-columns: 1fr;
     }
     .route-deck-card {
         height: 380px;

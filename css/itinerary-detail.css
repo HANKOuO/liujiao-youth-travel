@@ -283,11 +283,13 @@ body.itinerary-detail-page .site-header.scrolled {
 }
 
 .route-lead-summary {
-    font-size: 0.96rem;
+    font-size: 0.95rem;
     color: #4A453E;
     line-height: 1.8;
     margin: 0;
-    max-width: 900px;
+    width: 100% !important;          /* 撐滿整排 */
+    max-width: none !important;       /* 解除 900px 的最大寬度限制 */
+    letter-spacing: 0.3px;
 }
 
 .route-two-columns-layout {
@@ -430,58 +432,133 @@ body.itinerary-detail-page .site-header.scrolled {
     gap: 20px;
 }
 
+/* 路線側邊指南卡容器 */
 .route-specs-box {
     background: #FFFFFF;
-    border-radius: 10px;
-    padding: 22px 20px;
-    border: 1px solid #EBE6DE;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    border: 1px solid #ECE7DE;
+    border-radius: 14px;
+    padding: 28px 24px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
 }
 
+.specs-card-header {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #F0ECE4;
+    padding-bottom: 14px;
+}
+
+.specs-badge {
+    font-family: var(--display, sans-serif);
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #D96328;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.specs-title {
+    font-family: var(--serif, 'Noto Serif TC', serif);
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #1A1A1A;
+    margin: 0;
+}
+
+/* 規格列表 */
 .specs-list {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-bottom: 18px;
+    gap: 16px;
+    margin-bottom: 22px;
 }
 
-.spec-row {
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: #4A453E;
+.spec-row-item {
     display: flex;
-    align-items: center;
-    gap: 8px;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.spec-row-item .spec-icon {
+    font-size: 1.15rem;
+    line-height: 1.2;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.spec-text-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.spec-text-wrap strong {
+    font-size: 0.8rem;
+    color: #8C867D;
+    font-weight: 700;
+}
+
+.spec-text-wrap span {
+    font-size: 0.88rem;
+    color: #2E2A24;
+    line-height: 1.45;
+    font-weight: 600;
 }
 
 .sidebar-cursive-note {
-    font-family: 'Playfair Display', Georgia, cursive, serif;
+    font-family: 'Playfair Display', Georgia, serif;
     font-style: italic;
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     color: #D96328;
     text-align: right;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
 }
 
-.btn-join-route {
+/* 主按鈕：Google 地圖外連 */
+.btn-route-map {
     display: block;
     width: 100%;
     text-align: center;
     background-color: #D96328;
     color: #FFFFFF;
     text-decoration: none;
-    padding: 11px 0;
+    padding: 12px 0;
     border-radius: 999px;
     font-size: 0.92rem;
     font-weight: 700;
+    letter-spacing: 0.5px;
     box-shadow: 0 4px 14px rgba(217, 99, 40, 0.35);
-    transition: background-color 0.2s ease, transform 0.2s ease;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.btn-route-map:hover {
+    background-color: #B84E1B;
+    transform: translateY(-2px);
+}
+
+/* 次按鈕：預約此走讀梯次 */
+.btn-route-apply {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background-color: #F8F7F4;
+    color: #4A463F;
+    border: 1px solid #D8D2C6;
+    text-decoration: none;
+    padding: 10px 0;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    transition: all 0.2s ease;
     box-sizing: border-box;
 }
 
-.btn-join-route:hover {
-    background-color: #B84E1B;
-    transform: translateY(-2px);
+.btn-route-apply:hover {
+    background-color: #111111;
+    color: #FFFFFF;
+    border-color: #111111;
 }
 
 .route-map-card {

@@ -855,16 +855,18 @@ body.spots-map-body {
 }
 
 .spot-col-desc {
-    font-size: 0.78rem;
+    font-size: 0.8rem;
     color: #666158;
-    line-height: 1.6;
+    line-height: 1.55;
     margin: 0 0 14px;
     flex: 1;
+    /* 限制最多顯示 2 行，多餘文字自動省略成 ... */
     display: -webkit-box;
-    line-clamp: 3;
-    -webkit-line-clamp: 3;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    height: 2.5em; /* 固定兩行高度，確保每張卡片底部整齊切齊 */
 }
 
 .spot-col-foot {
@@ -887,4 +889,292 @@ body.spots-map-body {
 
 @media (max-width: 520px) {
     .spots-cards-grid { grid-template-columns: 1fr; }
+}
+
+/* ==================== 據點詳細彈窗 (左側純地圖版) ==================== */
+.spot-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(18, 16, 14, 0.75);
+    backdrop-filter: blur(8px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    box-sizing: border-box;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.spot-modal-backdrop.is-active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.spot-modal-card {
+    background: #FFFFFF;
+    width: 100%;
+    max-width: 860px;
+    height: 480px;                   /* 固定黃金比例高度 */
+    max-height: 90vh;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+    transform: translateY(24px) scale(0.97);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.spot-modal-backdrop.is-active .spot-modal-card {
+    transform: translateY(0) scale(1);
+}
+
+.spot-modal-close-btn {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.92);
+    color: #444444;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+    transition: all 0.2s ease;
+}
+
+.spot-modal-close-btn:hover {
+    background: #111111;
+    color: #FFFFFF;
+}
+
+.spot-modal-body {
+    display: grid;
+    grid-template-columns: 1fr 1.05fr;
+    height: 100%;
+}
+
+/* 左欄：滿版 Google Maps */
+.spot-modal-map-col {
+    width: 100%;
+    height: 100%;
+    background: #E5E3DF;
+    border-right: 1px solid #ECE7DE;
+    position: relative;
+}
+
+.spot-modal-map-col iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+/* 右欄：詳細資訊 */
+.spot-modal-info {
+    padding: 36px 32px 28px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.spot-modal-tag-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.spot-modal-location {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #8C867D;
+}
+
+.spot-modal-badge {
+    background: #FDEEE6;
+    color: #D96328;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+}
+
+.spot-modal-title {
+    font-family: var(--serif, 'Noto Serif TC', serif);
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: #111111;
+    margin: 0 0 14px 0;
+    letter-spacing: 0.5px;
+}
+
+.spot-modal-desc {
+    font-size: 0.92rem;
+    line-height: 1.85;
+    color: #555047;
+    margin: 0 0 18px 0;
+}
+
+.spot-modal-features {
+    font-size: 0.85rem;
+    color: #7E776E;
+    background: #F8F7F4;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #ECE7DE;
+}
+
+.spot-modal-features strong {
+    color: #222222;
+}
+
+.btn-spot-gmap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: #1A1A1A;
+    color: #FFFFFF;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 14px;
+}
+
+.btn-spot-gmap:hover {
+    background-color: #D96328;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(217, 99, 40, 0.35);
+}
+
+/* 手機版適配 */
+@media (max-width: 768px) {
+    .spot-modal-card {
+        height: 90vh;
+    }
+    .spot-modal-body {
+        grid-template-columns: 1fr;
+    }
+    .spot-modal-map-col {
+        height: 220px;
+    }
+    .spot-modal-info {
+        padding: 22px 20px;
+    }
+}
+
+/* ==================== 據點持續田調更新中樣式 ==================== */
+
+/* 1. 圖鑑卡片底部長條膠囊 */
+.spots-updating-note {
+    margin: 50px auto 30px auto;
+    max-width: 680px;
+    background: #FFFFFF;
+    border: 1px dashed #D8D2C6;
+    border-radius: 999px;
+    padding: 14px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+    box-sizing: border-box;
+}
+
+/* 呼吸燈小圓點 */
+.updating-dot-pulse {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background-color: #D96328;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.updating-dot-pulse::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background-color: rgba(217, 99, 40, 0.4);
+    animation: pulseGlowAnim 2s infinite ease-out;
+}
+
+@keyframes pulseGlowAnim {
+    0% { transform: scale(0.8); opacity: 1; }
+    100% { transform: scale(2.3); opacity: 0; }
+}
+
+.updating-text-group {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.updating-en {
+    font-family: var(--display, 'Poppins', sans-serif);
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #D96328;
+}
+
+.updating-desc {
+    font-size: 0.85rem;
+    color: #6E685F;
+    margin: 0;
+    letter-spacing: 0.3px;
+}
+
+/* 2. 手繪地圖左側欄底部小註記 */
+.map-sidebar-updating {
+    margin-top: 14px;
+    padding-top: 10px;
+    border-top: 1px dashed rgba(180, 170, 155, 0.65);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--serif, 'Noto Serif TC', serif);
+    font-size: 0.78rem;
+    color: #8C867D;
+    letter-spacing: 0.5px;
+    pointer-events: none;
+}
+
+.map-sidebar-updating .pulse-indicator {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #D96328;
+    box-shadow: 0 0 0 2px rgba(217, 99, 40, 0.25);
+    flex-shrink: 0;
+}
+
+/* 手機版適配 */
+@media (max-width: 680px) {
+    .spots-updating-note {
+        border-radius: 12px;
+        padding: 14px 20px;
+        text-align: left;
+    }
 }

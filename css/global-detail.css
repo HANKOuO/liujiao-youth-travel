@@ -179,7 +179,7 @@ body.global-detail-page .site-header.scrolled {
     text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
 }
 
-/* ==================== 2. 路線主內容區 (雙欄佈局) ==================== */
+/* ==================== 2. 路線主內容區 (雙欄佈局) ==================== -->
 .section-full-itinerary {
     width: 100%;
     background-color: #F8F7F4;
@@ -341,219 +341,158 @@ body.global-detail-page .site-header.scrolled {
     text-overflow: ellipsis;
 }
 
-/* 右欄側邊欄 (規格卡 + 地圖) */
+/* ==================== 右欄：走讀歷程檔案卡片 (全站統一標準) ==================== */
 .route-sidebar-col {
+    position: sticky;
+    top: 100px;
+    width: 360px;
+    flex-shrink: 0;
+}
+
+.route-archive-card {
+    background: #FFFFFF;
+    border: 1px solid #ECE7DE;
+    border-radius: 16px;
+    padding: 32px 28px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+    box-sizing: border-box;
+}
+
+.archive-eyebrow {
+    display: block;
+    font-family: var(--display, 'Poppins', sans-serif);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #D96328;
+    margin-bottom: 6px;
+}
+
+.archive-title {
+    font-family: var(--serif, 'Noto Serif TC', serif);
+    font-size: 1.35rem;
+    font-weight: 900;
+    color: #111111;
+    margin: 0 0 20px 0;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #F0ECE4;
+}
+
+.archive-meta-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px 0;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 18px;
 }
 
-.route-specs-box {
-    background: #FFFFFF;
-    border-radius: 10px;
-    padding: 22px 20px;
-    border: 1px solid #EBE6DE;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+.archive-meta-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
 }
 
-.specs-list {
+.archive-meta-list .meta-icon {
+    font-size: 1.15rem;
+    line-height: 1.2;
+    flex-shrink: 0;
+}
+
+.archive-meta-list strong {
+    display: block;
+    font-size: 0.74rem;
+    color: #8C867D;
+    margin-bottom: 2px;
+}
+
+.archive-meta-list span {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #222222;
+    line-height: 1.4;
+}
+
+/* 操作按鈕組 */
+.archive-action-group {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-bottom: 18px;
 }
 
-.spec-row {
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: #4A453E;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-#specTarget {
-    color: #D96328;
-    background: rgba(217, 99, 40, 0.08);
-    padding: 6px 10px;
-    border-radius: 6px;
-    font-size: 0.8rem;
-    margin-bottom: 4px;
-}
-
-.sidebar-cursive-note {
-    font-family: 'Playfair Display', Georgia, cursive, serif;
-    font-style: italic;
-    font-size: 1.15rem;
-    color: #D96328;
-    text-align: right;
-    margin-bottom: 14px;
-}
-
-.btn-join-route {
+.btn-archive-primary {
     display: block;
     width: 100%;
     text-align: center;
     background-color: #D96328;
-    color: #FFFFFF;
+    color: #FFFFFF !important;
     text-decoration: none;
     padding: 12px 0;
     border-radius: 999px;
-    font-size: 0.92rem;
+    font-size: 0.88rem;
     font-weight: 700;
     box-shadow: 0 4px 14px rgba(217, 99, 40, 0.35);
-    transition: background-color 0.2s ease, transform 0.2s ease;
+    transition: all 0.2s ease;
     box-sizing: border-box;
 }
 
-.btn-join-route:hover {
+.btn-archive-primary:hover {
     background-color: #B84E1B;
     transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(217, 99, 40, 0.45);
 }
 
-.route-map-card {
-    background: #FFFFFF;
-    border-radius: 10px;
-    padding: 20px 18px;
-    border: 1px solid #EBE6DE;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-}
-
-.map-card-eyebrow {
-    font-family: var(--display, sans-serif);
-    font-size: 0.65rem;
-    font-weight: 800;
-    letter-spacing: 2px;
-    color: #8C867C;
-}
-
-.map-card-title {
-    font-family: var(--serif, serif);
-    font-size: 1.2rem;
-    font-weight: 800;
-    color: #111111;
-    margin: 4px 0 6px 0;
-}
-
-.map-card-sub {
-    font-size: 0.74rem;
-    color: #77726A;
-    margin: 0 0 14px 0;
-    line-height: 1.4;
-}
-
-.map-sketch-stage {
-    width: 100%;
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid #EAE5DC;
-}
-
-.route-vector-map {
-    width: 100%;
-    height: auto;
+.btn-archive-secondary {
     display: block;
-}
-
-/* ==================== 3. 底部更多交流亮點 ==================== */
-.section-full-other-routes {
     width: 100%;
-    background-color: #FFFFFF;
-    border-top: 1px solid #ECE7DE;
-    padding: 44px 0 50px 0;
-}
-
-.other-routes-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 22px;
-}
-
-.other-eyebrow {
-    font-family: var(--display, sans-serif);
-    font-size: 0.68rem;
-    font-weight: 800;
-    letter-spacing: 2.5px;
-    color: #8C867C;
-    display: block;
-    margin-bottom: 4px;
-}
-
-.other-heading {
-    font-family: var(--serif, serif);
-    font-size: 1.45rem;
-    font-weight: 800;
-    color: #111111;
-    margin: 0 0 4px 0;
-}
-
-.other-sub {
-    font-size: 0.8rem;
-    color: #7E786E;
-    margin: 0;
-}
-
-.other-routes-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-    width: 100%;
-}
-
-.other-route-card {
-    background: #FFFFFF;
-    border: 1px solid #E6E1D8;
-    border-radius: 8px;
-    overflow: hidden;
+    text-align: center;
+    background-color: transparent;
+    color: #4A463F;
+    border: 1px solid #D8D2C6;
     text-decoration: none;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-    transition: transform 0.25s ease;
-}
-
-.other-route-card:hover { transform: translateY(-4px); }
-
-.other-thumb {
-    width: 100%;
-    height: 120px;
-}
-
-.other-thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.other-info {
-    padding: 12px 14px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.other-info strong {
-    font-size: 0.86rem;
+    padding: 10px 0;
+    border-radius: 999px;
+    font-size: 0.85rem;
     font-weight: 700;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.btn-archive-secondary:hover {
+    background-color: #FAF8F5;
+    border-color: #111111;
     color: #111111;
 }
 
-.other-info .arrow {
-    font-size: 0.85rem;
-    color: #D96328;
-}
-
-/* ==================== 4. 響應式適配 (RWD) ==================== */
+/* ==================== 3. 響應式適配 (RWD) ==================== */
 @media (max-width: 1100px) {
-    .route-two-columns-layout { grid-template-columns: 1fr; }
-    .other-routes-grid { grid-template-columns: repeat(2, 1fr); }
+    .route-two-columns-layout { 
+        grid-template-columns: 1fr; 
+    }
+    .route-sidebar-col {
+        position: static;
+        width: 100%;
+        margin-top: 36px;
+    }
 }
 
 @media (max-width: 768px) {
-    .site-content-container { padding: 0 20px; }
-    .compact-hero-banner { height: 380px; padding-bottom: 35px; }
-    .step-content-card { flex-direction: column; align-items: flex-start; }
-    .step-thumb { width: 100%; height: 120px; }
-    .step-desc { white-space: normal; }
-    .other-routes-grid { grid-template-columns: 1fr; }
+    .site-content-container { 
+        padding: 0 20px; 
+    }
+    .compact-hero-banner { 
+        height: 380px; 
+        padding-bottom: 35px; 
+    }
+    .step-content-card { 
+        flex-direction: column; 
+        align-items: flex-start; 
+    }
+    .step-thumb { 
+        width: 100%; 
+        height: 120px; 
+    }
+    .step-desc { 
+        white-space: normal; 
+    }
 }
