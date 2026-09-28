@@ -46,12 +46,10 @@ const I18N_DICTS = {
         route_1day_sub: '工藝、老街、科技等 A~F 方案',
         route_2day: '兩日遊規劃',
         route_2day_sub: '工廠村寄宿與雙城深度慢活',
-        route_craft: '文創產業線',
-        route_craft_sub: '日式官舍、刺繡館與木藍染',
         route_edu: '戶外教育專案',
-        route_edu_sub: '嘉禮有糖高中職 A~D 走讀',
+        route_edu_sub: '嘉禮有糖：高中職探究與青銀共創',
         route_global: '國際壯遊引力',
-        route_global_sub: '跨國青年炒糖與雙偶文化體驗'
+        route_global_sub: '來嘉，有藝思：外語學伴與雙偶文化'
     },
     'en': {
         label: 'EN',
@@ -65,8 +63,6 @@ const I18N_DICTS = {
         route_1day_sub: 'Crafts, Historic Streets & Heritage A~F',
         route_2day: '2-Day Journey',
         route_2day_sub: 'Homestay in Factory Village & Slow Life',
-        route_craft: 'Creative Craft',
-        route_craft_sub: 'Official Dorms, Embroidery & Indigo Dye',
         route_edu: 'Education Route',
         route_edu_sub: 'Sugar Culture & Field Trips for Students',
         route_global: 'Global Travel',
@@ -84,8 +80,6 @@ const I18N_DICTS = {
         route_1day_sub: '工芸・レトロ通り・テクノロジー A~F',
         route_2day: '一泊二日プラン',
         route_2day_sub: '工場村ホームステイと二都市巡り',
-        route_craft: '文創工芸コース',
-        route_craft_sub: '日本式官舎・刺繍館・藍染体験',
         route_edu: '教育研修コース',
         route_edu_sub: 'サトウキビ産業と学生フィールドワーク',
         route_global: '国際体験コース',
@@ -103,8 +97,6 @@ const I18N_DICTS = {
         route_1day_sub: 'Thủ công mỹ nghệ, phố cổ A~F',
         route_2day: 'Hành trình 2 ngày',
         route_2day_sub: 'Trải nghiệm làng nghề & sống chậm',
-        route_craft: 'Tuyến văn hóa sáng tạo',
-        route_craft_sub: 'Khu nhà Nhật cổ, thêu & nhuộm chàm',
         route_edu: 'Dự án giáo dục dã ngoại',
         route_edu_sub: 'Khám phá văn hóa đường mía học đường',
         route_global: 'Sức hút quốc tế',
@@ -112,18 +104,29 @@ const I18N_DICTS = {
     }
 };
 
-// 套用指定語言
+// ==================================================
+// 全網頁自動翻譯組件初始化
+// ==================================================
+window.googleTranslateElementInit = function() {
+    new google.translate.TranslateElement({
+        pageLanguage: 'zh-TW',
+        includedLanguages: 'en,ja,vi,zh-TW',
+        autoDisplay: false
+    }, 'google_translate_element');
+};
+
+// 套用指定語言（含導覽列字典 ＋ 全網頁自動翻譯引擎）
 function applyLanguage(lang) {
     if (!I18N_DICTS[lang]) lang = 'zh-TW';
     const dict = I18N_DICTS[lang];
 
-    // 更新導覽列按鈕顯示文字
+    // 1. 更新導覽列按鈕顯示文字
     const labelElem = document.getElementById('currentLangLabel') || document.getElementById('currentLangText');
     if (labelElem) {
         labelElem.textContent = dict.label;
     }
 
-    // 翻譯頁面上所有帶有 data-i18n 的元素
+    // 2. 翻譯導覽列等帶有 data-i18n 的元素
     document.querySelectorAll('[data-i18n]').forEach(elem => {
         const key = elem.getAttribute('data-i18n');
         if (dict[key]) {
@@ -131,7 +134,7 @@ function applyLanguage(lang) {
         }
     });
 
-    // 更新下拉選單中的 active 狀態
+    // 3. 更新下拉選單中的 active 狀態
     document.querySelectorAll('.lang-option, .lang-opt').forEach(opt => {
         const targetLang = opt.getAttribute('data-lang');
         if (targetLang === lang) {
@@ -141,19 +144,51 @@ function applyLanguage(lang) {
         }
     });
 
-    // 儲存偏好並設定 HTML 屬性
+    // 4. 儲存偏好並設定 HTML 屬性
     localStorage.setItem('user_preferred_lang', lang);
     document.documentElement.lang = lang;
+
+    // 5. 驅動全網頁翻譯 Cookie 與 DOM 變更
+    if (lang === 'zh-TW') {
+        document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=" + window.location.hostname + "; path=/;";
+        const select = document.querySelector('.goog-te-combo');
+        if (select) {
+            select.value = 'zh-TW';
+            select.dispatchEvent(new Event('change'));
+        }
+    } else {
+        document.cookie = `googtrans=/zh-TW/${lang}; path=/`;
+        const select = document.querySelector('.goog-te-combo');
+        if (select) {
+            select.value = lang;
+            select.dispatchEvent(new Event('change'));
+        }
+    }
 }
 
+// 動態載入 Google 官方翻譯引擎 API
+(function() {
+    if (!document.getElementById('google-translate-script')) {
+        const div = document.createElement('div');
+        div.id = 'google_translate_element';
+        div.style.display = 'none';
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.appendChild(div);
+        });
+
+        const gtScript = document.createElement('script');
+        gtScript.id = 'google-translate-script';
+        gtScript.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+        document.head.appendChild(gtScript);
+    }
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
-    // ==================================================
     // 2. 頂部導覽列：滾動透明/毛玻璃切換監聽
-    // ==================================================
     const siteHeader = document.getElementById('siteHeader');
     function checkHeaderScroll() {
         if (!siteHeader) return;
-        // 滾動超過 30px 時加上 .scrolled 變白色半透明，回頂部變全透明
         if (window.scrollY > 30) {
             siteHeader.classList.add('scrolled');
         } else {
@@ -161,11 +196,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     window.addEventListener('scroll', checkHeaderScroll, { passive: true });
-    checkHeaderScroll(); // 載入時先判定一次
+    checkHeaderScroll();
 
-    // ==================================================
     // 3. 手機漢堡選單與遮罩綁定
-    // ==================================================
     const mobileToggle = document.getElementById('navMobileToggle');
     const sidebarOverlay = document.getElementById('sidebarOverlay');
 
@@ -180,9 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
         sidebarOverlay.addEventListener('click', window.closeSidebar);
     }
 
-    // ==================================================
     // 4. 搜尋浮層控制 (Search Overlay)
-    // ==================================================
     const searchBtn = document.getElementById('navSearchBtn');
     const searchOverlay = document.getElementById('searchOverlay');
     const searchCloseBtn = document.getElementById('searchCloseBtn');
@@ -226,9 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ==================================================
-    // 5. 語言切換選單 (相容 .open 與 .active)
-    // ==================================================
+    // 5. 語言切換選單
     const langBtn = document.getElementById('langBtn');
     const langWrap = document.querySelector('.lang-dropdown-wrapper');
     const langOptions = document.querySelectorAll('.lang-option, .lang-opt');
@@ -263,17 +292,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedLang = localStorage.getItem('user_preferred_lang') || 'zh-TW';
     applyLanguage(savedLang);
 
-    // ==================================================
     // 6. 按下鍵盤 ESC 關閉所有視窗與選單
-    // ==================================================
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             closeSearch();
-            if (langWrap) {
-                langWrap.classList.remove('open');
-                langWrap.classList.remove('active');
+            const currentLangWrap = document.querySelector('.lang-dropdown-wrapper');
+            if (currentLangWrap) {
+                currentLangWrap.classList.remove('open');
+                currentLangWrap.classList.remove('active');
             }
             window.closeSidebar();
         }
     });
+
+    // 監聽並強制清除 Google 翻譯強行加在 body 上的 top 下推數值
+    const observer = new MutationObserver(() => {
+        if (document.body.style.top && document.body.style.top !== '0px') {
+            document.body.style.top = '0px';
+        }
+    });
+    observer.observe(document.body, { attributes: true, attributeFilter: ['style'] });
 });

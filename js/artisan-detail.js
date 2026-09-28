@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 更新網頁標題
         document.title = `${data.name} ｜ 訪談問答 ｜ 職人故事 ｜ 嘉義青年壯遊`;
 
-        // 同步更新頂部麵包屑文字 (已修復變數名稱)
+        // 同步更新頂部麵包屑文字
         const crumbEl = document.getElementById('crumbArtisanName');
         if (crumbEl) {
             crumbEl.textContent = `${data.name} 老師專訪`;
@@ -31,12 +31,13 @@ document.addEventListener('DOMContentLoaded', () => {
             counterEl.textContent = `${data.index} / ${totalArtisans < 10 ? '0' + totalArtisans : totalArtisans}`;
         }
 
-        // 更新上一位 / 下一位按鈕連結
+        // 更新上一位 / 下一位按鈕連結與點擊事件
         const prevId = id > 1 ? id - 1 : totalArtisans;
         const nextId = id < totalArtisans ? id + 1 : 1;
 
         const prevBtn = document.getElementById('prevArtisanBtn');
         const nextBtn = document.getElementById('nextArtisanBtn');
+        
         if (prevBtn) {
             prevBtn.href = `?id=${prevId}`;
             prevBtn.onclick = (e) => {
@@ -77,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const quoteEl = document.querySelector('.slanted-quote-text');
         if (quoteEl) quoteEl.innerHTML = data.quote;
 
-        // 更新右欄：Q&A 卡片列表 (直接全部渲染，不再做分類過濾)
+        // 更新右欄：Q&A 卡片列表 (純粹文字雙欄排版)
         const qaContainer = document.querySelector('.qa-cards-list');
         if (qaContainer && data.qaList) {
             qaContainer.innerHTML = data.qaList.map(qa => `
@@ -85,40 +86,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="card-num-col">${qa.num}</div>
                     <div class="card-content-col">
                         <h4 class="qa-question-text">${qa.question}</h4>
-                        
-                        <div class="qa-audio-bar">
-                            <button class="btn-play-audio" aria-label="播放音訊">▶</button>
-                            <div class="waveform-graphic">
-                                <span style="height:35%"></span><span style="height:65%"></span><span style="height:100%"></span><span style="height:45%"></span>
-                                <span style="height:80%"></span><span style="height:55%"></span><span style="height:90%"></span><span style="height:30%"></span>
-                                <span style="height:70%"></span><span style="height:50%"></span><span style="height:85%"></span><span style="height:40%"></span>
-                                <span style="height:60%"></span><span style="height:75%"></span><span style="height:45%"></span><span style="height:30%"></span>
-                            </div>
-                            <span class="audio-time-label">${qa.audioTime}</span>
-                        </div>
-
                         <blockquote class="qa-answer-quote">${qa.answer}</blockquote>
-                    </div>
-                    <div class="card-photo-col">
-                        <img src="${qa.photo}" alt="${qa.question}">
                     </div>
                 </article>
             `).join('');
-
-            // 綁定音訊播放波形動畫互動
-            qaContainer.querySelectorAll('.btn-play-audio').forEach(playBtn => {
-                playBtn.addEventListener('click', () => {
-                    const isPlaying = playBtn.classList.contains('is-playing');
-                    qaContainer.querySelectorAll('.btn-play-audio').forEach(b => {
-                        b.classList.remove('is-playing');
-                        b.textContent = '▶';
-                    });
-                    if (!isPlaying) {
-                        playBtn.classList.add('is-playing');
-                        playBtn.textContent = '❚❚';
-                    }
-                });
-            });
         }
     }
 

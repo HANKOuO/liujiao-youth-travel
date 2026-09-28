@@ -16,36 +16,48 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!data) return;
 
         // 更新上方標題與文案
-        document.getElementById('activeRouteEyebrow').textContent = data.eyebrow;
-        document.getElementById('activeRouteName').textContent = data.mainTitle;
-        document.getElementById('activeRouteKeywords').textContent = data.keywords;
-        document.getElementById('activeRouteSummary').textContent = data.summary;
+        const elEyebrow = document.getElementById('activeRouteEyebrow');
+        const elName = document.getElementById('activeRouteName');
+        const elKeywords = document.getElementById('activeRouteKeywords');
+        const elSummary = document.getElementById('activeRouteSummary');
 
-        // 更新規格卡片
-        document.getElementById('specTarget').innerHTML = `<span class="spec-icon">🎓</span> ${data.specs.target}`;
-        document.getElementById('specSpots').innerHTML = `<span class="spec-icon">📍</span> ${data.specs.spots}`;
-        document.getElementById('specTime').innerHTML = `<span class="spec-icon">🕒</span> ${data.specs.time}`;
-        document.getElementById('specTransport').innerHTML = `<span class="spec-icon">🚶</span> ${data.specs.transport}`;
+        if (elEyebrow) elEyebrow.textContent = data.eyebrow;
+        if (elName) elName.textContent = data.mainTitle;
+        if (elKeywords) elKeywords.textContent = data.keywords;
+        if (elSummary) elSummary.textContent = data.summary;
 
-// 更新時間軸清單 (Timeline - 與一日遊極簡格式完全一致)
+        // 更新右側「走讀歷程檔案」卡片資料
+        if (data.archive) {
+            const elTrail = document.getElementById('archiveTrail');
+            const elPacing = document.getElementById('archivePacing');
+            const elHighlight = document.getElementById('archiveHighlight');
+
+            if (elTrail) elTrail.textContent = data.archive.trail;
+            if (elPacing) elPacing.textContent = data.archive.pacing;
+            if (elHighlight) elHighlight.textContent = data.archive.highlight;
+        }
+
+        // 更新時間軸清單 (Timeline - 與一日遊極簡格式完全一致)
         const timelineCol = document.getElementById('timelineItineraryCol');
-        timelineCol.innerHTML = data.timeline.map(step => `
-            <article class="timeline-step-item">
-                <div class="step-time-badge">
-                    <span class="time-range">${step.time.replace(' - ', '<br>')}</span>
-                    <div class="step-circle-num">${step.num}</div>
-                </div>
-                <div class="step-content-card">
-                    <div class="step-thumb">
-                        <img src="${step.img}" alt="${step.title}">
+        if (timelineCol && data.timeline) {
+            timelineCol.innerHTML = data.timeline.map(step => `
+                <article class="timeline-step-item">
+                    <div class="step-time-badge">
+                        <span class="time-range">${step.time.replace(' - ', '<br>')}</span>
+                        <div class="step-circle-num">${step.num}</div>
                     </div>
-                    <div class="step-text-detail">
-                        <h3 class="step-heading">${step.title}</h3>
-                        <p class="step-desc">${step.desc}</p>
+                    <div class="step-content-card">
+                        <div class="step-thumb">
+                            <img src="${step.img}" alt="${step.title}">
+                        </div>
+                        <div class="step-text-detail">
+                            <h3 class="step-heading">${step.title}</h3>
+                            <p class="step-desc">${step.desc}</p>
+                        </div>
                     </div>
-                </div>
-            </article>
-        `).join('');
+                </article>
+            `).join('');
+        }
 
         // 更新手繪路線地圖 SVG 標記點
         const svgMap = document.getElementById('routeVectorMap');

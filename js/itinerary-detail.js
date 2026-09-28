@@ -21,10 +21,19 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('activeRouteKeywords').textContent = data.keywords;
         document.getElementById('activeRouteSummary').textContent = data.summary;
 
-        // 更新規格卡片
-        document.getElementById('specSpots').innerHTML = `<span class="spec-icon">📍</span> ${data.specs.spots}`;
-        document.getElementById('specTime').innerHTML = `<span class="spec-icon">🕒</span> ${data.specs.time}`;
-        document.getElementById('specTransport').innerHTML = `<span class="spec-icon">🚶</span> ${data.specs.transport}`;
+// 更新路線指南規格卡
+        const specTrack = document.getElementById('specTrack');
+        const specTransport = document.getElementById('specTransport');
+        const specHighlight = document.getElementById('specHighlight');
+        const btnRouteGmap = document.getElementById('btnRouteGmap');
+
+        if (specTrack) specTrack.textContent = data.specs.track || '六腳與朴子地方據點巡禮';
+        if (specTransport) specTransport.textContent = data.specs.transport || '適合步行與自行騎乘';
+        if (specHighlight) specHighlight.textContent = data.specs.highlight || '在地文史走讀與工藝體驗';
+        
+        if (btnRouteGmap && data.specs.mapUrl) {
+            btnRouteGmap.href = data.specs.mapUrl;
+        }
 
         // 更新時間軸清單 (Timeline)
         const timelineCol = document.getElementById('timelineItineraryCol');
